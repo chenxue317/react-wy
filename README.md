@@ -80,4 +80,38 @@ import {BrowserRouter, HashRouter} from 'react-router-dom'
   <Redirect to='/about' />
 </Switch>
 ```
+* 4)路由使用
+activeClassName="on"设置切换时的样式
+exact==严格匹配
+其余默认模糊匹配
+```
+<NavLink to="/"className="navItem" activeClassName="on" exact>
+<span>
+  <i className="iconfont icon-shouye"></i>
+</span>
+<span className="text">首页</span>
+</NavLink>
+```
 
+
+## swiper在react中的使用
+* 下载安装
+* 引入样式  import "swiper/dist/css/swiper.css"
+* 在componentDidMount中new Swiper（）
+
+## style标签属性值需要为{{}}
+## setState()
+1). setState()更新状态是异步还是同步的?
+    a. 执行setState()的位置?
+        在react控制的回调函数中: 生命周期勾子 / react事件监听回调
+        非react控制的异步回调函数中: 定时器回调 / 原生事件监听回调 / promise回调 /...
+    b. 异步 OR 同步?
+        react相关回调中: 异步
+        其它异步回调中: 同步
+
+2). 关于异步的setState()
+    a. 多次调用, 如何处理?
+        setState({}): 合并更新一次状态, 只调用一次render()更新界面 ---状态更新和界面更新都合并了
+        setState(fn): 更新多次状态, 但只调用一次render()更新界面  ---状态更新没有合并, 但界面更新合并了
+    b. 如何得到异步更新后的状态数据?
+        在setState()的callback回调函数中

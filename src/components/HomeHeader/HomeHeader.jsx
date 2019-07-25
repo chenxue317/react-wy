@@ -1,4 +1,5 @@
 import React, { Component} from 'react'
+import BScroll from 'better-scroll'
 import './HomeHeader.styl'
 export default class HomeHeader extends Component {
  state={
@@ -26,12 +27,28 @@ export default class HomeHeader extends Component {
    })
   }else{
    this.setState({
-    openOrClose:'close'
+    openOrClose:'close',
+    isShowDetail:false
    })
   }
  
  }
- closeDetail=()=>{}
+ closeDetail=()=>{
+  this.setState({
+    openOrClose:'close',
+    isShowDetail:false
+   })
+ }
+
+
+ componentDidMount(){
+  this.bs = new BScroll(this.refs.navContainer, {
+    probeType: 3,
+    scrollX:true,
+    click:true,
+    
+  })
+ }
  render() {
   //
   const {catergorys,currentIndex,icon,openOrClose,isShowDetail} = this.state
@@ -42,7 +59,7 @@ export default class HomeHeader extends Component {
       <input type="text" placeholder={icon} className="search iconfont"/>
       <div className="login">登录</div>
     </div>
-    <div className="navContainer">
+    <div className="navContainer" ref="navContainer">
       <ul className={!isShowDetail?"headerNav":' disappear'}>
         {
          catergorys.map((category,index)=>(

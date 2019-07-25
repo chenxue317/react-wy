@@ -10,6 +10,7 @@ import Cart from './pages/Cart/Cart.jsx';
 import Profile from './pages/Profile/Profile.jsx';
 
 export default class App extends Component {
+
   render() {
     return (
       <div className="wrap">
@@ -21,7 +22,7 @@ export default class App extends Component {
             <Route path="/profile" component={Profile}/>
             <Route path="/" component={Home}/>
           </Switch>
-          <FooterNav/>
+          <FooterNav />
       </div>
     )
   }

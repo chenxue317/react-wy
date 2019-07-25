@@ -6,6 +6,7 @@ import {HashRouter} from 'react-router-dom'
 import App from './App';
 import 'lib-flexible'
 import * as serviceWorker from './serviceWorker';
+import './mock/mockServer.js'
 
 ReactDOM.render((<HashRouter><App/></HashRouter>), document.getElementById('root'));
 
