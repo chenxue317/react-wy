@@ -1,68 +1,83 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#day01
+## 1、移动端适配
+* yarn add lib-flexible postcss-pxtorem
+* npm eject 暴露所有的配置文件
+* 在webpack.config.js中配置以下信息
+```
+require('postcss-pxtorem')({
+  rootValue: 75,
+  propWhiteList: [],
+  minPixelValue:2,
+})
+```
+## 2、在react中使用stylus
+```
+// 注意: 根据已有的sass的配置修改, 并添加在相应的位置
 
-## Available Scripts
+	const stylusRegex = /\.(stylus|styl)$/;
+	const stylusModuleRegex = /\.module\.(stylus|styl)$/;
 
-In the project directory, you can run:
+	{
+      test: stylusRegex,
+      exclude: stylusModuleRegex,
+      use: getStyleLoaders(
+        {
+          importLoaders: 2,
+          sourceMap: isEnvProduction && shouldUseSourceMap,
+        },
+        'stylus-loader'
+      ),
+      // Don't consider CSS imports dead code even if the
+      // containing package claims to have no side effects.
+      // Remove this when webpack adds a warning or an error for this.
+      // See https://github.com/webpack/webpack/issues/6571
+      sideEffects: true,
+    },
 
-### `npm start`
+	{
+      test: stylusModuleRegex,
+      use: getStyleLoaders(
+        {
+          importLoaders: 2,
+          sourceMap: isEnvProduction && shouldUseSourceMap,
+          modules: true,
+          getLocalIdent: getCSSModuleLocalIdent,
+        },
+        'stylus-loader'
+      ),
+    },
+```
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 3、路由的使用
+* 下载react-router  yarn add react-router-dom@4---下载第四版的router
+* 1）将a标签改为NavLink/Link标签，href改为to
+  * NavLink同Link的区别
+    * navlink可以设置切换时的样式，link不可以，设置方法如下
+     ```
+     <NavLink className="list-group-item" activeClassName='activeClass' to='/home'>Home</NavLink>
+     ```
+* 2）在App.js中渲染组件的时候包裹一层路由器
+```
+import {BrowserRouter, HashRouter} from 'react-router-dom'
+    ReactDOM.render(
+        (
+            <BrowserRouter>
+            <App />
+            </BrowserRouter>
+            /*<HashRouter>
+            <App />
+            </HashRouter>*/
+        ),document.getElementById('root')
+    )
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+```
+* 3）注册路由
+ * 加switch的作用：只要查找到对应的路径，就不会继续向下查找，否则会一直向下查找，这样提高了效率
+```
+<Switch>
+  <Route path='/about' component={About} />
+  <Route path='/home' component={Home} />
+  <Redirect to='/about' />
+</Switch>
+```
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
