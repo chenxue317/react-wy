@@ -8,7 +8,7 @@ import Category from './pages/Category/Category.jsx'
 import Topic from './pages/Topic/Topic.jsx';
 import Cart from './pages/Cart/Cart.jsx';
 import Profile from './pages/Profile/Profile.jsx';
-
+import Search from './pages/Search/Search'
 export default class App extends Component {
 
   render() {
@@ -18,7 +18,7 @@ export default class App extends Component {
             <Route path="/cart" component={Cart}/>
             <Route path="/category" component={Category}/>
             <Route path="/topic" component={Topic}/>
-            
+            <Route path="/search" component={Search}/>
             <Route path="/profile" component={Profile}/>
             <Route path="/" component={Home}/>
           </Switch>

@@ -7,7 +7,7 @@ class FooterNav extends Component {
   
  render() {
   const {pathname}  = this.props.location
-   if(pathname==='/profile'||pathname==='/category'){
+   if(pathname==='/profile'){
      return null
    }else{
     return(

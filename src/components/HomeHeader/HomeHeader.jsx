@@ -63,7 +63,7 @@ export default class HomeHeader extends Component {
       <ul className={!isShowDetail?"headerNav":' disappear'}>
         {
          catergorys.map((category,index)=>(
-          <li key={index} className={'navItem '+(currentIndex===index?'active':'')}>
+          <li key={index} className={'navItem '+(currentIndex===index?'active':'')} onClick={()=>(this.setState({currentIndex:index}))}>
            <a href="#1">{category}</a>
           </li>
          ))

@@ -45,7 +45,6 @@ export default class HomeContent extends Component {
   const result = await reqPersonalShop()
   if(result.code===0){
    const personalShop = result.data
-   console.log(personalShop)
    let smallArr = []
    let bigArr = []
    personalShop.forEach(shop => {
